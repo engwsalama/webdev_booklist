@@ -1,0 +1,74 @@
+Book list Project
+
+============= Part (1) ===================
+1- Create Book Constructor...> book list properties
+2- Create UI Constructor ...> book-list prototypes
+3- Create Event listeneres ,with submit and callback function 
+within form event listener
+	4- get form values 
+	5- Instantiate Book
+	6- Instantiate UI
+	7- call ui.addBookToList(book); 
+8 - under UI constructor , UI.prototype.addBookToList = function(book){}
+Within addBookToList 
+9- const list = document.getElementbyId('book-list');
+10- create tr --> const row = document.createElement('tr);
+11- insert Cols under row --> row.innerHTML=``
+12 - append the above html into list -->list.appendChild(row);
+13 - Create a clearFields prototype
+
+============= Part (2): Validation & Alert Messages =============
+1- create if statement 
+	if(title ==='' || author==='' || isbn===''){
+		alert('failed')
+	}else{
+		ui.addBookToList(book);
+		ui.clearFields();
+	}
+2- create a prototype showAlert
+UI.prototype.showAlert= function(message,className){
+  const div = document.createElement('div');
+  div.className=`alert ${className}`;
+  div.appendChild(document.createTextNode('message'));
+  const container = document.querySelector('.container');
+  const form = document.querySelector('#book-form');
+  container.insertBefore(div,form)
+
+  setTimeout(function(){
+    document.querySelector('.alert').remove()
+   },3000);
+
+}
+
+============= Part (3):Delete book item =============
+
+// Event Listener for delete
+document.getElementById('book-list').addEventListener('click', function(e){
+
+  // Instantiate UI
+  const ui = new UI();
+
+  // Delete book
+  ui.deleteBook(e.target);
+
+  // Show message
+  ui.showAlert('Book Removed!', 'success');
+
+  e.preventDefault();
+});
+
+// Delete Book
+UI.prototype.deleteBook = function(target){
+  if(target.className === 'delete') {
+    target.parentElement.parentElement.remove();
+  }
+}
+
+============= Part (4):Convert es5 to es6 =============
+
+
+
+
+
+
+
